@@ -1,0 +1,167 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #0f0f14;
+  color: white;
+}
+
+.app {
+  max-width: 1100px;
+  margin: auto;
+  padding: 30px 20px;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 35px;
+}
+
+header h1 {
+  font-size: 42px;
+  margin-bottom: 8px;
+}
+
+header p {
+  color: #aaa;
+}
+
+.form-section {
+  background: #1b1b24;
+  padding: 25px;
+  border-radius: 15px;
+  margin-bottom: 35px;
+}
+
+.form-section h2 {
+  text-align: center;
+}
+
+form {
+  display: grid;
+  gap: 12px;
+}
+
+input,
+textarea,
+select {
+  width: 100%;
+  padding: 13px;
+  border: none;
+  border-radius: 8px;
+  background: #292936;
+  color: white;
+  font-size: 15px;
+}
+
+textarea {
+  min-height: 90px;
+  resize: vertical;
+}
+
+button {
+  padding: 11px 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background: #e5b94c;
+  color: #111;
+  font-weight: bold;
+}
+
+button:hover {
+  opacity: 0.85;
+}
+
+.form-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.movies-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.movies-heading select {
+  width: auto;
+}
+
+.movie-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.movie-card {
+  background: #1b1b24;
+  padding: 22px;
+  border-radius: 15px;
+  border: 1px solid #30303b;
+}
+
+.movie-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.movie-top h3 {
+  margin-top: 0;
+  font-size: 23px;
+}
+
+.rating {
+  white-space: nowrap;
+}
+
+.genre {
+  color: #e5b94c;
+  font-weight: bold;
+}
+
+.status {
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 20px;
+  background: #4b3d20;
+  margin: 10px 0;
+  font-size: 13px;
+}
+
+.status.watched {
+  background: #214d35;
+}
+
+.buttons {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
+
+.delete {
+  background: #d9534f;
+  color: white;
+}
+
+@media (max-width: 600px) {
+  .movies-heading {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .movies-heading select {
+    width: 100%;
+  }
+
+  header h1 {
+    font-size: 32px;
+  }
+}
