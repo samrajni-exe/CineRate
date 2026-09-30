@@ -1,6 +1,8 @@
 import { useState } from "react";
 import "./App.css";
 
+const API_URL = "https://cinerate-backend-t7qh.onrender.com";
+
 function App() {
   const [movies, setMovies] = useState([
     {
@@ -36,7 +38,13 @@ function App() {
   const [editingId, setEditingId] = useState(null);
   const [filter, setFilter] = useState("All");
 
-  // ADD / UPDATE MOVIE
+  const clearForm = () => {
+    setTitle("");
+    setGenre("");
+    setRating("");
+    setReview("");
+  };
+
   const addMovie = async (e) => {
     e.preventDefault();
 
@@ -46,10 +54,9 @@ function App() {
     }
 
     try {
-      // UPDATE MOVIE
       if (editingId) {
         const response = await fetch(
-          `http://localhost:5001/api/movies/${editingId}`,
+          `${API_URL}/api/movies/${editingId}`,
           {
             method: "PUT",
             headers: {
@@ -65,7 +72,6 @@ function App() {
         );
 
         const data = await response.json();
-
         console.log("Updated:", data);
 
         setMovies(
@@ -83,28 +89,21 @@ function App() {
         );
 
         setEditingId(null);
-      }
-
-      // ADD MOVIE
-      else {
-        const response = await fetch(
-          "http://localhost:5001/api/movies",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              title,
-              genre,
-              rating,
-              review,
-            }),
-          }
-        );
+      } else {
+        const response = await fetch(`${API_URL}/api/movies`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            title,
+            genre,
+            rating,
+            review,
+          }),
+        });
 
         const data = await response.json();
-
         console.log("Added:", data);
 
         const newMovie = {
@@ -126,26 +125,16 @@ function App() {
     }
   };
 
-  // CLEAR FORM
-  const clearForm = () => {
-    setTitle("");
-    setGenre("");
-    setRating("");
-    setReview("");
-  };
-
-  // DELETE MOVIE
   const deleteMovie = async (id) => {
     try {
       const response = await fetch(
-        `http://localhost:5001/api/movies/${id}`,
+        `${API_URL}/api/movies/${id}`,
         {
           method: "DELETE",
         }
       );
 
       const data = await response.json();
-
       console.log("Deleted:", data);
 
       setMovies(movies.filter((movie) => movie.id !== id));
@@ -160,7 +149,6 @@ function App() {
     }
   };
 
-  // MARK WATCHED / TO WATCH
   const toggleWatched = (id) => {
     setMovies(
       movies.map((movie) =>
@@ -177,7 +165,6 @@ function App() {
     );
   };
 
-  // EDIT MOVIE
   const editMovie = (movie) => {
     setEditingId(movie.id);
     setTitle(movie.title);
@@ -191,7 +178,6 @@ function App() {
     });
   };
 
-  // FILTER MOVIES
   const filteredMovies =
     filter === "All"
       ? movies
@@ -205,13 +191,11 @@ function App() {
 
   return (
     <div className="app">
-      {/* HEADER */}
       <header>
         <h1>🎬 CineRate</h1>
         <p>Track, rate and review your favourite movies.</p>
       </header>
 
-      {/* ADD / EDIT FORM */}
       <section className="form-section">
         <h2>{editingId ? "Edit Movie" : "Add a Movie"}</h2>
 
@@ -266,7 +250,6 @@ function App() {
         </form>
       </section>
 
-      {/* MOVIES */}
       <section className="movies-section">
         <div className="movies-heading">
           <h2>My Movies</h2>
