@@ -8,12 +8,14 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// Home route
 app.get("/", (req, res) => {
   res.json({
     message: "CineRate backend is running!",
   });
 });
 
+// Get movies
 app.get("/api/movies", (req, res) => {
   res.json({
     message: "Movie API is working!",
@@ -21,6 +23,7 @@ app.get("/api/movies", (req, res) => {
   });
 });
 
+// Add movie
 app.post("/api/movies", (req, res) => {
   res.json({
     message: "Movie received!",
@@ -28,6 +31,7 @@ app.post("/api/movies", (req, res) => {
   });
 });
 
+// Update movie
 app.put("/api/movies/:id", (req, res) => {
   res.json({
     message: "Movie updated!",
@@ -36,6 +40,7 @@ app.put("/api/movies/:id", (req, res) => {
   });
 });
 
+// Delete movie
 app.delete("/api/movies/:id", (req, res) => {
   res.json({
     message: "Movie deleted!",
@@ -43,6 +48,9 @@ app.delete("/api/movies/:id", (req, res) => {
   });
 });
 
-app.listen(5001, () => {
-  console.log("Server running on port 5001");
+// Render uses its own PORT
+const PORT = process.env.PORT || 5001;
+
+app.listen(PORT, "0.0.0.0", () => {
+  console.log(`Server running on port ${PORT}`);
 });
